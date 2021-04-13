@@ -1,0 +1,19 @@
+require_relative './config/environment'
+require 'sinatra/activerecord/rake'
+#gives us task we can use to manipulate our db
+
+desc "Start our app console"
+task :console do
+  Pry.start
+end
+
+desc "Rose"
+task :rose do
+  puts "🐱"*100
+end
+
+#rake console 
+#starts pry session 
+
+#rake -T
+#lists all of your rake tasks

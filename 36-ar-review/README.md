@@ -56,13 +56,6 @@ Create your migrations.
 
 ## Aggregate and Association Methods
 
-#### Actor
-
-- `Actor#roles`
-  - should return a collection of all the roles that the actor has played
-- `Actor#movies`
-  - should return a collection of all the movies that the actor has performed in
-
 #### Veterinarian
 - `Veterinarian#patients_name` returns an array of pet names from pets that have an appointments with this veterinarian
 

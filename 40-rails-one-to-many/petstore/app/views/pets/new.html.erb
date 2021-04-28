@@ -1,0 +1,10 @@
+<h1> Create pets here! 🤯 </h1>
+
+<%= form_for @pet do |f| %>
+  Pet Name: <%= f.text_field :name %><br />
+  Pet Breed: <%= f.text_field :breed %><br />
+  Select Store:
+  <%= f.collection_select :store_id, Store.all, :id, :name %><br />
+
+  <%= f.submit %>
+<% end %>

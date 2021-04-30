@@ -1,0 +1,15 @@
+<h2> Store is <%= @store.name %> </h2>
+
+<p> Location: <%= @store.location %> </p>
+
+<ul>
+    <% @store.pets.each do |pet| %>
+      <li>
+        <%= link_to pet.name, pet_path(pet) %>
+      </li>
+    <% end %>
+</ul>
+
+
+<%= link_to "Edit", edit_store_path(@store) %>
+<%= button_to "Delete Store", { action: :destroy, id: @store.id }, method: :delete, data: { confirm: "Are you sure?" } %>

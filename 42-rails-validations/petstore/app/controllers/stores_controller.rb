@@ -1,0 +1,55 @@
+class StoresController < ApplicationController
+
+  before_action :find_store, only: [:show,:edit,:update,:destroy]
+
+  def index
+    @stores = Store.all
+  end
+
+  def new
+    @store = Store.new
+  end
+
+  def create
+    @store = Store.new(store_params)
+    if @store.valid?
+      @store.save
+      redirect_to stores_path
+    else
+      flash[:errors] = @store.errors.full_messages
+      redirect_to new_store_path
+    end
+  end
+
+  def show
+    if @store
+      render :show
+    else
+      redirect_to stores_path
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    @store.update(store_params)
+    redirect_to store_path(@store)
+  end
+
+  def destroy
+    @store.destroy
+    redirect_to stores_path
+  end
+
+  private
+  def store_params
+    params.require(:store).permit(:name,:location)
+  end
+
+  def find_store
+    @store = Store.find_by(id: params[:id])
+  end
+
+
+end

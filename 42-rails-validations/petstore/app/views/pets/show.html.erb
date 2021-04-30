@@ -1,0 +1,9 @@
+<h2> Pet is <%= @pet.name %> </h2>
+
+<p>Breed: <%= @pet.breed %> </p>
+
+<p>Find 'em here: <%= link_to @pet.store.name, store_path(@pet.store) %> </p>
+
+
+<%= link_to "Edit", edit_pet_path(@pet) %>
+<%= button_to "Adopt Pet", { action: :destroy, id: @pet.id }, method: :delete, data: { confirm: "Are you sure?" } %>

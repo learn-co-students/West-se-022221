@@ -20,8 +20,23 @@ class Login extends React.Component {
     //
     // Should pass in user_id once we get response from our API
     //
-    this.props.handleLogin(1)
-    this.props.history.push('/')
+    fetch('http://localhost:3000/sessions',{
+      method: 'POST',
+      headers: {
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify({ user: {...this.state} })
+    }).then(res => res.json())
+    .then(tokenObj => {
+      if(tokenObj.token){
+        localStorage.setItem('token',tokenObj.token)
+        this.props.handleLogin(tokenObj.token)
+        this.props.history.push('/')
+      }else{
+        alert('Login failed..')
+      }
+    })
+
   }
 
   render(){

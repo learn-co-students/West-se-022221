@@ -1,9 +1,9 @@
 class PetsController < ApplicationController
 
-  before_action :check_if_logged_in?, only: [:index]
+  before_action :authorized, only: [:index]
 
   def index
-    @pets = @user.pets
+    @pets = current_user.pets
     render json: PetSerializer.new(@pets).serialized_json
   end
 

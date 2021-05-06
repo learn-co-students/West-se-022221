@@ -18,11 +18,18 @@ class App extends React.Component {
 
   state = {
     logged_in: false,
-    user_id: null
+    token: null
   }
 
-  handleLogin = (user_id) => {
-    this.setState({ logged_in: true, user_id })
+  handleLogin = (token) => {
+    this.setState({ logged_in: true, token })
+  }
+
+  componentDidMount(){
+    const authToken = localStorage.getItem('token')
+    if(authToken){
+      this.setState({ logged_in: true, token: authToken })
+    }
   }
 
   render(){
@@ -36,7 +43,7 @@ class App extends React.Component {
 
             <Route path='/profile' component={() => {
               return this.state.logged_in
-                ? <Profile /> : <Redirect to='/login' />
+                ? <Profile {...this.state} /> : <Redirect to='/login' />
             }} />
 
             <Route path='/login' component={() => (
@@ -48,7 +55,8 @@ class App extends React.Component {
             )} />
 
             <Route path='/logout' component={() => {
-              this.setState({ logged_in: false, user_id: null })
+              localStorage.clear()
+              this.setState({ logged_in: false, token: null })
               return <Redirect to='/' />
             }} />
 

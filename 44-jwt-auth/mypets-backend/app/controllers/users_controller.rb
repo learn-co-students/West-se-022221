@@ -2,27 +2,18 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
-    render json: UserSerializer.new(@user).serialized_json
+    if @user.persisted?
+      # token = JWT.encode({ :user_id => @user.id }, ENV['SUPER_SECRET_KEY'])
+      # render :json => { "token": token }
+      render :json => { "msg": "Now login.." }
+    else
+      render :json => { "msg": "Signup failed.." }
+    end
   end
 
   def index
     @users = User.all
     render json: UserSerializer.new(@users).serialized_json
-    # render json: @users.to_json(
-    #   include: {
-    #     pets: {
-    #       only: [
-    #         :name,
-    #         :breed
-    #       ]
-    #     }
-    #   },
-    #   except: [
-    #     :created_at,
-    #     :updated_at,
-    #     :password
-    #   ]
-    # )
   end
 
   private

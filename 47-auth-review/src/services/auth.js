@@ -29,7 +29,7 @@ export function login(e, body) {
 
 export function getSecrets() {
     return fetch(secretsURL, {
-        method: 'GET', authHeaders
+        method: 'GET', headers: authHeaders
     }).then(r => {
         return r.json()
     })
